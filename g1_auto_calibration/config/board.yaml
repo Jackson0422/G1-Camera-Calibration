@@ -1,0 +1,20 @@
+kind: charuco
+dictionary: DICT_4X4_50
+dictionary_verified: true
+geometry_verified: true
+geometry_source: https://github.com/bdaiinstitute/spot_wrapper/blob/main/spot_wrapper/calibration/charuco_board_detection.py
+squares_x: 9
+squares_y: 4
+square_length_m: 0.115
+marker_length_m: 0.09
+legacy_pattern: true
+physical_pattern_verified: true
+physical_pattern_evidence: Operator supplied the actual panel specification on 2026-11-11, identifying the Boston Dynamics Spot Camera Calibration Panel with a 9x4 ChArUco grid, 115 mm squares, 90 mm markers, 18 markers, DICT_4X4_50, legacy pattern true and 24 internal corners. These match this configuration; panel placement is separately confirmed fixed.
+min_charuco_corners: 8
+units: m
+markers: {} # ID: four metric XYZ corners in decoded TL,TR,BR,BL order.
+min_markers: 3
+max_reprojection_rms_px: 1.5
+min_pose_error_gap_px: 0.25
+min_marker_area_px2: 100
+# Approximate panel outline (1.185 x 0.50 m) is NOT marker geometry.

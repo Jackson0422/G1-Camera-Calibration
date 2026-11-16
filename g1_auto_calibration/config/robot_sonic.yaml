@@ -1,0 +1,102 @@
+urdf: g1_29dof.urdf
+base_frame: left_ankle_roll_link
+mount_frame: torso_link
+# Operator requested advisory MuJoCo self-collisions for this calibration profile.
+# Limits, floor checks, feedback monitoring and the complete preview still apply.
+self_collision_check: 'off'
+# Latest operator direction: use the robot's native joint-position servos;
+# automatic whole-body balance is not requested. This is not a balance claim.
+control_strategy: native_joint_position
+automatic_balance_requested: false
+native_position_entry_authorized: true
+native_position_control_evidence: Operator clarified on 2026-11-12 that automatic balance is not required for the requested small upper-body motion and requested the robot's native joint position servos. Restore all 29 saved standing targets, then keep the 26 non-waist targets fixed and execute the original 40 waist targets. This authorizes the position-control workflow, not a claim that physical standing or target arrival has been verified.
+native_position_transport: legacy_exclusive
+native_position_factory_controller: ai
+native_position_transport_evidence: Real run automatic_run_20261112T114958_927065Z received API-not-implemented code 3203 for SwitchToUserCtrl and remained in actual FSM 0. Read-only CheckMode receipt read_only_owner_20261112T115336_533624Z identified the existing controller as ai. This profile therefore uses exclusive rt/lowcmd ownership after a successful ReleaseMode reply and a fresh empty-owner observation; it never substitutes an invented UserCtrl FSM. Return to ai is separately verified and is not an atomic controller handover guarantee.
+# FSM 500 is the installed SDK's named Start state. Admission and return must
+# still receive fresh successful FSM observations; this is not firmware proof.
+native_position_factory_fsm_ids: [500]
+# Generic newer-UserCtrl admission; legacy_exclusive uses the separate IDs below.
+native_position_initial_fsm_ids: [0, 1, 500]
+# Admit the observed damping FSM1 directly without commanding zero torque first.
+# This is entry policy, not proof of load continuity or standing balance.
+legacy_position_initial_fsm_ids: [0, 1]
+# The latest requirement supersedes the earlier fixture-bearing trial.
+# Both feet carry the robot; the shoulder harness only catches a fall.
+support_mode: feet
+support_fixture_role: emergency_backup
+support_requirement_evidence: Operator clarified on 2026-11-12 that the controller must assume no load-bearing fixture. The shoulder harness only prevents falls. Restore the saved 29-joint standing posture from another upright double-support posture; sitting, single-support and floor get-up are outside this requested recovery scope.
+stability_required_phases: [full_body_entry, waist_motion, sampling]
+post_run_standing_is_acceptance_criterion: false
+stability_scope_evidence: Operator clarified on 2026-11-12 that stability is required during execution; indefinite standing after the run is not part of the acceptance requirement.
+external_support_confirmed: false
+external_support_evidence: Latest instruction on 2026-11-12 requires support through both feet. The operator clarified that the shoulder harness cannot carry the full robot weight and the feet always carry part of the load. The controller must not depend on the harness for normal standing or full-weight support during takeover or release.
+fixture_can_carry_full_weight: false
+standing_entry_scope: upright_double_support
+standing_entry_scope_evidence: Operator explicitly selected "still standing with both feet on the ground; joint angles may differ" on 2026-11-12.
+first_pose_entry_authorized: true
+first_pose_entry_evidence: Operator requested on 2026-11-12 that full-body movement restore all 29 saved standing angles first, then hold every non-waist target at that saved reference while changing only the waist for calibration. This supersedes entry with non-waist targets frozen at the startup posture.
+joint_deviation_check_evidence: Operator explicitly requested on 2026-11-12 that startup and ongoing motion must not abort for joint-angle deviation from the initial posture or previous command. Check actual target arrival only after each motion segment finishes, before recording. The accepted arrival and sampling accuracy criteria remain unchanged.
+# Requested initialization target; a saved angle vector does not provide balance.
+default_pose_file: default_standing_pose.yaml
+default_pose_role: initialization_target
+mount_attachment_evidence: null
+sdk_source: /home/kaixin/unitree_sdk2_python
+interface: eno1
+domain: 0
+topic: rt/lowstate
+mode_pr_required: 0
+joint_indices:
+  left_hip_pitch_joint: 0
+  left_hip_roll_joint: 1
+  left_hip_yaw_joint: 2
+  left_knee_joint: 3
+  left_ankle_pitch_joint: 4
+  left_ankle_roll_joint: 5
+  right_hip_pitch_joint: 6
+  right_hip_roll_joint: 7
+  right_hip_yaw_joint: 8
+  right_knee_joint: 9
+  right_ankle_pitch_joint: 10
+  right_ankle_roll_joint: 11
+  waist_yaw_joint: 12
+  waist_roll_joint: 13
+  waist_pitch_joint: 14
+  left_shoulder_pitch_joint: 15
+  left_shoulder_roll_joint: 16
+  left_shoulder_yaw_joint: 17
+  left_elbow_joint: 18
+  left_wrist_roll_joint: 19
+  left_wrist_pitch_joint: 20
+  left_wrist_yaw_joint: 21
+  right_shoulder_pitch_joint: 22
+  right_shoulder_roll_joint: 23
+  right_shoulder_yaw_joint: 24
+  right_elbow_joint: 25
+  right_wrist_roll_joint: 26
+  right_wrist_pitch_joint: 27
+  right_wrist_yaw_joint: 28
+state_max_latency_s: null
+state_timing_evidence: null
+settle_window_s: 1.0
+# Legacy raw-velocity/range settings remain for older sessions. This standing
+# workflow uses URDF mount-pose variation with the operator-approved accuracy
+# budget instead; these values are not URDF mechanical limits.
+max_joint_speed_rad_s: 0.015
+max_joint_range_rad: 0.005
+sampling_stability:
+  method: urdf_mount_pose
+  translation_limit_m: 0.005
+  rotation_limit_deg: 0.5
+  criteria_source: Operator accepted the existing calibration quality targets on 2026-11-11 (translation RMS 5 mm, rotation RMS 0.5 deg, validation reprojection 2 px). Sampling uses conservative mount-motion diameter bounds within the accepted pose budget; independent final validation remains required.
+base_fixed_evidence: User confirmed on 2026-11-11 that both feet remain planted without
+  lifting, turning or displacement throughout this standing-only calibration; left
+  foot link is the reference. Common foot slip cannot be inferred from joint state.
+board_stationary_evidence: User confirmed on 2026-11-11 that the physical calibration
+  panel remains fixed throughout the session and is visible in the D435 field of view.
+stance_monitor:
+  enabled: true
+  other_foot_frame: right_ankle_roll_link
+  translation_limit_m: 0.005
+  rotation_limit_deg: 1.0
+  common_foot_slip_observable: false

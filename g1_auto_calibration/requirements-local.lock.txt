@@ -1,0 +1,13 @@
+# Additional project-local packages tested with ros_jazzy on 2026-11-10.
+# Install with --target .deps --no-deps. Existing Conda supplies NumPy/OpenCV/PyYAML.
+scipy==1.18.1
+depthai==3.12.0
+pyzmq==27.3.0
+msgpack==1.2.4
+cyclonedds==0.10.2
+# Offline MuJoCo candidate screening and desktop preview.
+mujoco==3.7.0
+glfw==2.11.0
+PyOpenGL==3.1.10
+absl-py==2.5.1
+etils==1.15.0

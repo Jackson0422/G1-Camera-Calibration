@@ -1,0 +1,27 @@
+d435:
+  mount_attachment_evidence: Operator confirmed on 2026-11-11 that the D435 used in this calibration is rigidly installed and remains fixed relative to its configured torso mount throughout acquisition. No installation translation or rotation was manually measured.
+  backend: network
+  endpoint: tcp://192.168.123.164:5556
+  color_key: ego_view
+  optical_frame: d435_color_optical_calibrated
+  expected_serial: '419522071149'
+  max_transport_latency_s: null
+  timing_evidence: null
+oak:
+  # OAK USB is connected to the ROBOT. run_sonic_observation and preview_cameras copy
+  # the package and start serve_oak there over SSH (robot_server below), then stop it.
+  backend: network
+  endpoint: tcp://192.168.123.164:5567
+  robot_server:
+    host: unitree@192.168.123.164
+    remote_root: /tmp/g1_camera_calibration_20261110
+    python: /home/unitree/miniconda3/envs/g1_wireless/bin/python
+  color_key: oak_rgb
+  optical_frame: oak_color_optical_calibrated
+  expected_serial: '19443010D173EE4800'
+  max_transport_latency_s: null
+  timing_evidence: null
+  width: 1920
+  height: 1080
+  fps: 15
+  # For a directly attached OAK use backend: depthai.

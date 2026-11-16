@@ -1,0 +1,7 @@
+.deps/
+__pycache__/
+*.pyc
+g1_auto_calibration/data/*
+g1_auto_calibration/results/*
+!**/.gitkeep
+MUJOCO_LOG.TXT
